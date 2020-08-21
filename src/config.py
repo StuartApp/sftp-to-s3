@@ -33,7 +33,6 @@ class AppConfig:
         if 'args' in kwargs:
             self.load_from_params(kwargs.get('args'))
         self.listen_port = int(self.listen_port)
-        logging.debug('Config: ' + str(self.asDict()))
 
     def load_from_envvars(self):
         ''' 
@@ -48,6 +47,7 @@ class AppConfig:
         self.bucket = os.getenv('S3_BUCKET', self.bucket)
         self.listen_addr = os.getenv('LISTEN_ADDR', self.listen_addr)
         self.listen_port = os.getenv('LISTEN_PORT', self.listen_port)
+        self.log_level = os.getenv('LOG_LEVEL', self.log_level)
 
     def load_from_dictionary(self, cfg):
         '''
