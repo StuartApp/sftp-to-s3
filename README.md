@@ -51,7 +51,7 @@ listen_port: 3373
 ### Docker image
 Running this image is as simple as
 ```
-docker run -v ./sample_config.yml:/app/sample_config.yml sftp2s3 sftp2s3 -c /app/sample_config.yml
+docker run -v ${PWD}/sample_config.yml:/config.yml sftp2s3 -c /config.yml
 ```
 
 ## Configuration
