@@ -29,6 +29,8 @@ def client_connection(server_socket, conn, addr, config):
             time.sleep(1)
     except EOFError:
         pass
+    except paramiko.ssh_exception.SSHException:
+        pass
 
 def start_server(config):
     logging.info("Starting server")

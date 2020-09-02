@@ -72,14 +72,14 @@ class AppConfig:
         Load the configuration from execution arguments
         '''
         if params.host != None:
-            self.listen_addr = params.host
+            self.listen_addr = params.host.rstrip().lstrip()
         if params.port != None:
-            self.listen_port = params.port
+            self.listen_port = params.port.rstrip().lstrip()
         if params.level != None:
-            self.log_level = params.level
+            self.log_level = params.level.rstrip().lstrip()
         if params.bucket != None:
-            self.bucket = params.bucket
-        keyfile = params.keyfile
+            self.bucket = params.bucket.rstrip().lstrip()
+        keyfile = params.keyfile.rstrip().lstrip()
         if keyfile:
             self.private_key = paramiko.RSAKey.from_private_key_file(keyfile)
 
