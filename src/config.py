@@ -19,7 +19,7 @@ class AppConfig:
 
     def __init__(self, *largs, **kwargs):
         if 'args' in kwargs:
-            config_file = kwargs['args'].config_file
+            config_file = kwargs['args'].config_file.rstrip().lstrip()
 
         config_file = os.getenv('CONFIG_FILE', config_file)
         self.load_from_envvars()
@@ -79,9 +79,9 @@ class AppConfig:
             self.log_level = params.level.rstrip().lstrip()
         if params.bucket != None:
             self.bucket = params.bucket.rstrip().lstrip()
-        keyfile = params.keyfile.rstrip().lstrip()
-        if keyfile:
-            self.private_key = paramiko.RSAKey.from_private_key_file(keyfile)
+        if params.keyfile != None:
+            file_name = params.keyfile.rstrip().lstrip()
+            self.private_key = paramiko.RSAKey.from_private_key_file(file_name)
 
     def asDict(self):
         '''
