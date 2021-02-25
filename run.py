@@ -43,6 +43,7 @@ def main():
 
     args = parser.parse_args()
     config = AppConfig(args=args)
+
     logging.getLogger().setLevel(config.log_level)
     start_server(config)
 

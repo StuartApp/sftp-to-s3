@@ -17,6 +17,7 @@ def client_connection(server_socket, conn, addr, config):
     remote_ip,remote_port = addr
     try:
         logging.info(f"Connection from {remote_ip}:{remote_port}")
+        if remote_ip == "10.31.112.24": return
         transport = paramiko.Transport(conn)
         transport.add_server_key(config.private_key)
         transport.set_subsystem_handler(
@@ -28,7 +29,8 @@ def client_connection(server_socket, conn, addr, config):
         channel = transport.accept()
         while transport.is_active():
             time.sleep(1)
-    except EOFError:
+    except EOFError as err:
+        logging.debug(err)
         pass
     except SSHException as err:
         logging.debug(err)
@@ -37,8 +39,8 @@ def client_connection(server_socket, conn, addr, config):
 def start_server(config):
     logging.info("Starting server")
     logging.debug('Config: ' + str(config.asDict()))
-    paramiko_level = getattr(paramiko.common, config.log_level)
-    paramiko.common.logging.basicConfig(level=paramiko_level)
+    #paramiko_level = getattr(paramiko.common, config.log_level)
+    #paramiko.common.logging.basicConfig(level=paramiko_level)
     transport_log = logging.getLogger('paramiko.transport')
     transport_log.setLevel(logging.CRITICAL)
 

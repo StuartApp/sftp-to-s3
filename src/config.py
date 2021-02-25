@@ -66,6 +66,7 @@ class AppConfig:
             fd = io.StringIO(private_key)
             self.private_key = paramiko.RSAKey.from_private_key(fd)
         self.bucket = cfg.get('bucket', self.bucket)
+        self.log_level = cfg.get('log_level', self.log_level)
 
     def load_from_params(self, params):
         '''

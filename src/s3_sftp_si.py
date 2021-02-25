@@ -71,9 +71,9 @@ class S3SFTPServerInterface (SFTPServerInterface):
         return self.stat(path)
 
     def open(self, path, flags, attr):
-        logging.info(f'OPEN {path}')
+        logging.info(f'OPEN {path}, flags={flags}, attr={attr}')
         path = path.lstrip('/')
-        tmp_file = tempfile.TemporaryFile()
+        tmp_file = tempfile.NamedTemporaryFile()
         fobj = StubSFTPHandle()
         fobj.filename = path
         fobj.readfile = tmp_file
